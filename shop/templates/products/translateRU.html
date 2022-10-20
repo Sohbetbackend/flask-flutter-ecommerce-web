@@ -1,0 +1,22 @@
+{% extends "layout.html" %}
+{% block content %}
+{% include 'navbar.html' %}
+<div class="container">
+    <div class="row">
+        <div class="col-md-1"></div>
+            <div class="col-md-10">
+                <div class="text-center p-2 h4">Towaryň rus terjimesini goş</div>
+                {% from "_formhelpers.html" import render_field %}
+                <form method="post" enctype="multipart/form-data">
+                <div>
+                    {{ render_field(form.prodname, class="form-control") }}
+
+                    {{ render_field(form.proddesc, class="form-control", rows="10") }}
+                </div>
+                <p><input type="submit" value="{% if getproduct %}Update {% else %}Add{% endif %} product" class="btn-outline-info">
+                </form>
+            </div>
+      <div class="col-md-1"></div>
+    </div>
+</div>
+{% endblock content %}

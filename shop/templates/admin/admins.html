@@ -1,0 +1,28 @@
+{% extends 'layout.html' %}
+{% block content %}
+{% include 'admin/adminnavbar.html' %}
+
+<div class="container" style="font-family: Georgia, 'Times New Roman', Times, serif;">
+    <table class="table tbale-sm">
+        <thead>
+            <th>Sr</th>
+            <th>Ady</th>
+            <th>Ulanyjy ady</th>
+            <th>Gmail</th>
+            <th>Paroly</th>
+        </thead>
+        <tbody>
+          {% for admins in admins %}
+          <tr>
+            <td>{{loop.index}}</td>
+            <td>{{ admins.name }}</td>
+            <td>{{ admins.username }}</td>
+            <td>{{ admins.email }}</td>
+            <td>{{ admins.password }}</td>
+<!--============= MODEL ===================-->
+
+          {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock content %}

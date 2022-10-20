@@ -1,0 +1,20 @@
+{% extends 'layout.html' %}
+{% block content %}
+{% include 'navbar.html' %}
+<div class="bg-light" style="font-family: Georgia, 'Times New Roman', Times, serif;">
+    <div class="container" style="height:100vh; padding-top:5vh">
+        <div class="row" style="height:50vh;">
+            <div class="col-md-3"></div>
+                <div class="col-md-6 bg-light">
+                        <div class="bg-white">
+                            <h5>Ulanyjy adyňyz:{{ user.name }}</h5>
+                            <hr>
+                            <h5>Telefon belgiňiz:{{ user.contact }}</h5>
+                            <hr>
+                        </div>
+                    </form>
+                </div>
+          <div class="col-md-3"></div>
+        </div>
+    </div>
+    </div>{% endblock %}

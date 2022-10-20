@@ -1,0 +1,171 @@
+# Russian translations for PROJECT.
+# Copyright (C) 2022 ORGANIZATION
+# This file is distributed under the same license as the PROJECT project.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2022.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: PROJECT VERSION\n"
+"Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
+"POT-Creation-Date: 2022-09-27 14:14+0500\n"
+"PO-Revision-Date: 2022-09-27 14:14+0500\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language: ru\n"
+"Language-Team: ru <LL@li.org>\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
+"n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.10.3\n"
+
+#: shop/__init__.py:39
+msgid "Please login first"
+msgstr "Пожалуйста сперва войдите"
+
+#: shop/customers/forms.py:9
+msgid "At: "
+msgstr "Имя"
+
+#: shop/customers/forms.py:10 shop/customers/forms.py:27
+msgid "Açar sözi: "
+msgstr "Пароль"
+
+#: shop/customers/forms.py:11
+msgid "Açar sözi gaýtala: "
+msgstr "Повтори Пароль"
+
+#: shop/customers/forms.py:12 shop/customers/forms.py:26
+msgid "Telefon: "
+msgstr "Телефон"
+
+#: shop/customers/forms.py:16
+msgid "Bu at eýýäm ulanyldy!"
+msgstr "Это имя уже существует"
+
+#: shop/customers/forms.py:20
+msgid "Bu telefon nomer eýýäm ulanyldy!"
+msgstr "Это номер уже существует"
+
+#: shop/customers/routes.py:42
+msgid "Nädogry telefon ýada açar söz"
+msgstr "Неправильный телефон или пароль"
+
+#: shop/products/forms.py:6
+msgid "Ady"
+msgstr "Названия"
+
+#: shop/products/forms.py:7
+msgid "Bahasy"
+msgstr "Цена"
+
+#: shop/products/forms.py:8
+msgid "Telefon"
+msgstr "Телефон"
+
+#: shop/products/forms.py:9
+msgid "Arzanladyş"
+msgstr "Скидка"
+
+#: shop/products/forms.py:10 shop/templates/products/index.html:54
+#: shop/templates/products/index.html:101
+#: shop/templates/products/index.html:148
+#: shop/templates/products/result.html:18
+msgid "Giňişleýin"
+msgstr "Описание"
+
+#: shop/products/forms.py:12
+msgid "Surat 1"
+msgstr "Картина 1"
+
+#: shop/products/forms.py:13
+msgid "Surat 2"
+msgstr "Картина 2"
+
+#: shop/products/forms.py:14
+msgid "Surat 3"
+msgstr "Картина 3"
+
+#: shop/products/forms.py:18
+msgid "RusAdy"
+msgstr ""
+
+#: shop/products/forms.py:19
+msgid "RusGiňişleýin"
+msgstr ""
+
+#: shop/templates/navbar.html:60
+msgid "Kategoriýalar"
+msgstr "Категории"
+
+#: shop/templates/navbar.html:74
+msgid "Brendler"
+msgstr "Бренды"
+
+#: shop/templates/navbar.html:87
+msgid "Search any product..."
+msgstr "Ищите..."
+
+#: shop/templates/navbar.html:98
+msgid "Agza bol"
+msgstr "Регистрация"
+
+#: shop/templates/navbar.html:99
+msgid "Içeri gir"
+msgstr "Войти"
+
+#: shop/templates/navbar.html:105
+msgid "Hasabym"
+msgstr "Мой аккаунт"
+
+#: shop/templates/navbar.html:108
+msgid "Ulgamdan çyk"
+msgstr "Выйти"
+
+#: shop/templates/navbar.html:109
+msgid "Maglumatym"
+msgstr "Профиль"
+
+#: shop/templates/products/index.html:38
+msgid "Önümler"
+msgstr "Продукти"
+
+#: shop/templates/products/index.html:50 shop/templates/products/index.html:97
+#: shop/templates/products/index.html:144
+#: shop/templates/products/result.html:15
+msgid "Bahasy:"
+msgstr "Цена"
+
+#: shop/templates/products/index.html:51 shop/templates/products/index.html:98
+#: shop/templates/products/index.html:145
+msgid "Telefon:"
+msgstr "Телефон"
+
+#: shop/templates/products/index.html:65 shop/templates/products/index.html:112
+#: shop/templates/products/index.html:158
+msgid "Öňki"
+msgstr "Предыдущий"
+
+#: shop/templates/products/index.html:81 shop/templates/products/index.html:128
+#: shop/templates/products/index.html:174
+msgid "Indiki"
+msgstr "Следущий"
+
+#: shop/templates/products/single_page.html:13
+#: shop/templates/products/single_page.html:15
+msgid "Önümiň ady:"
+msgstr "Названия"
+
+#: shop/templates/products/single_page.html:18
+msgid "Önümiň bahasy:"
+msgstr "Цена"
+
+#: shop/templates/products/single_page.html:21
+msgid "Arzanladyş:"
+msgstr "Скидка"
+
+#: shop/templates/products/single_page.html:25
+#: shop/templates/products/single_page.html:28
+msgid "Önümiň maglumaty"
+msgstr "Описание"
+

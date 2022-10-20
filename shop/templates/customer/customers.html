@@ -1,0 +1,25 @@
+{% extends 'layout.html' %}
+{% block content %}
+{% include 'admin/adminnavbar.html' %}
+<div class="container" style="font-family: Georgia, 'Times New Roman', Times, serif;">
+    {% include '_messages.html' %}
+    <table class="table tbale-sm">
+        <thead>
+            <th>Sr</th>
+            <th>Ady</th>
+            <th>Telefon</th>
+            <th>Pozmak</th>
+        </thead>
+        <tbody>
+          {% for clients in clients %}
+          <tr>
+            <td>{{ clients.id }}</td>
+            <td>{{ clients.name }}</td>
+            <td>{{ clients.contact }}</td>
+            <td><form action="{{url_for('deletecustomer',id=clients.id)}}" method="post">
+                    <button type="submit" class="btn btn-sm btn-danger">Pozmak</button>
+                </form>
+            </td>
+          </tr>
+          {% endfor %}
+{% endblock %}

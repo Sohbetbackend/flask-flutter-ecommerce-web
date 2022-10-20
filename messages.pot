@@ -1,0 +1,169 @@
+# Translations template for PROJECT.
+# Copyright (C) 2022 ORGANIZATION
+# This file is distributed under the same license as the PROJECT project.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2022.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PROJECT VERSION\n"
+"Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
+"POT-Creation-Date: 2022-09-27 14:14+0500\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.10.3\n"
+
+#: shop/__init__.py:39
+msgid "Please login first"
+msgstr ""
+
+#: shop/customers/forms.py:9
+msgid "At: "
+msgstr ""
+
+#: shop/customers/forms.py:10 shop/customers/forms.py:27
+msgid "Açar sözi: "
+msgstr ""
+
+#: shop/customers/forms.py:11
+msgid "Açar sözi gaýtala: "
+msgstr ""
+
+#: shop/customers/forms.py:12 shop/customers/forms.py:26
+msgid "Telefon: "
+msgstr ""
+
+#: shop/customers/forms.py:16
+msgid "Bu at eýýäm ulanyldy!"
+msgstr ""
+
+#: shop/customers/forms.py:20
+msgid "Bu telefon nomer eýýäm ulanyldy!"
+msgstr ""
+
+#: shop/customers/routes.py:42
+msgid "Nädogry telefon ýada açar söz"
+msgstr ""
+
+#: shop/products/forms.py:6
+msgid "Ady"
+msgstr ""
+
+#: shop/products/forms.py:7
+msgid "Bahasy"
+msgstr ""
+
+#: shop/products/forms.py:8
+msgid "Telefon"
+msgstr ""
+
+#: shop/products/forms.py:9
+msgid "Arzanladyş"
+msgstr ""
+
+#: shop/products/forms.py:10 shop/templates/products/index.html:54
+#: shop/templates/products/index.html:101
+#: shop/templates/products/index.html:148
+#: shop/templates/products/result.html:18
+msgid "Giňişleýin"
+msgstr ""
+
+#: shop/products/forms.py:12
+msgid "Surat 1"
+msgstr ""
+
+#: shop/products/forms.py:13
+msgid "Surat 2"
+msgstr ""
+
+#: shop/products/forms.py:14
+msgid "Surat 3"
+msgstr ""
+
+#: shop/products/forms.py:18
+msgid "RusAdy"
+msgstr ""
+
+#: shop/products/forms.py:19
+msgid "RusGiňişleýin"
+msgstr ""
+
+#: shop/templates/navbar.html:60
+msgid "Kategoriýalar"
+msgstr ""
+
+#: shop/templates/navbar.html:74
+msgid "Brendler"
+msgstr ""
+
+#: shop/templates/navbar.html:87
+msgid "Search any product..."
+msgstr ""
+
+#: shop/templates/navbar.html:98
+msgid "Agza bol"
+msgstr ""
+
+#: shop/templates/navbar.html:99
+msgid "Içeri gir"
+msgstr ""
+
+#: shop/templates/navbar.html:105
+msgid "Hasabym"
+msgstr ""
+
+#: shop/templates/navbar.html:108
+msgid "Ulgamdan çyk"
+msgstr ""
+
+#: shop/templates/navbar.html:109
+msgid "Maglumatym"
+msgstr ""
+
+#: shop/templates/products/index.html:38
+msgid "Önümler"
+msgstr ""
+
+#: shop/templates/products/index.html:50 shop/templates/products/index.html:97
+#: shop/templates/products/index.html:144
+#: shop/templates/products/result.html:15
+msgid "Bahasy:"
+msgstr ""
+
+#: shop/templates/products/index.html:51 shop/templates/products/index.html:98
+#: shop/templates/products/index.html:145
+msgid "Telefon:"
+msgstr ""
+
+#: shop/templates/products/index.html:65 shop/templates/products/index.html:112
+#: shop/templates/products/index.html:158
+msgid "Öňki"
+msgstr ""
+
+#: shop/templates/products/index.html:81 shop/templates/products/index.html:128
+#: shop/templates/products/index.html:174
+msgid "Indiki"
+msgstr ""
+
+#: shop/templates/products/single_page.html:13
+#: shop/templates/products/single_page.html:15
+msgid "Önümiň ady:"
+msgstr ""
+
+#: shop/templates/products/single_page.html:18
+msgid "Önümiň bahasy:"
+msgstr ""
+
+#: shop/templates/products/single_page.html:21
+msgid "Arzanladyş:"
+msgstr ""
+
+#: shop/templates/products/single_page.html:25
+#: shop/templates/products/single_page.html:28
+msgid "Önümiň maglumaty"
+msgstr ""
+

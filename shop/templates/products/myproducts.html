@@ -1,0 +1,26 @@
+{% extends 'layout.html' %}
+{% block content %}
+{% include 'navbar.html' %}
+
+{% for posts in posts %}
+      <div class="col-md-3 mt-4">
+        <div class="card">
+            <img src="{{url_for('static', filename='images/' + posts.image_1)}}" class="card-img-top" alt="{{posts.name}}" height="250px">
+            <div class="card-body">
+                {% if posts.discount > 0 %}
+                <h5 style="text-shadow: 1px 2px 2px #000; color: white; position: absolute; top: 3%; left: 70%; font-weight: 600; border: 2px solid green; background:green; border-radius: 50%; font-size:14px; font-family:italic;">-{{posts.discount}}%</h5>
+                {% endif %}
+              <h5 class="text-center">{{posts.name}}</h5>
+              <p class="text-center" style="color:green;"><b>{{_('Bahasy:')}} {{posts.price}} manat</b></p>
+              <p class="text-center">{{_('Magazin:')}} {{ posts.author.name }}</p>
+              <p class="text-center">{{_('Telefon:')}} {{ posts.phone }}</p>
+            </div>
+            <div class="card-footer">
+                <a href="{{url_for('single_page',id=posts.id)}}" class="float-left btn btn-sm btn-success btn-block" style="font-size:14px;">{{ _('Giňişleýin') }}</a>
+            </div>
+        </div>
+      </div>
+        {% endfor %}
+      </div>
+
+{% endblock %}

@@ -1,0 +1,27 @@
+{% extends "layout.html" %}
+{% block content %}
+{% include "navbar.html" %}
+<div class="bg-light" style="font-family: Georgia, 'Times New Roman', Times, serif;">
+<div class="container" style="height:100vh; padding-top:5vh">
+    <div class="row" style="height:50vh;">
+        <div class="col-md-3"></div>
+            <div class="col-md-6 bg-light">
+                {% from "_formhelpers.html" import render_field %}
+                {% include '_messages.html' %}
+                <form method=post>
+                    {{form.csrf_token}}
+                    <div class="bg-white">
+                        {{ render_field(form.contact, class="form-control", placeholder="+993") }}
+                        {{ render_field(form.password, class="form-control") }}
+                    
+                    <button type="submit" class="btn btn-success" style="width: 80vh;">
+                        <i class="fa fa-external-link"></i> Içeri gir
+                    </button>
+                    </div>
+                </form>
+            </div>
+      <div class="col-md-3"></div>
+    </div>
+</div>
+</div>
+{% endblock content %}

@@ -1,0 +1,17 @@
+{% extends 'layout.html' %}
+{% block content %}
+{% include 'navbar.html' %}
+{% if CURRENT_LANGUAGE == 'ru' %}
+        <div style="font-family:Georgia, 'Times New Roman', Times, serif">
+                <h1 align="center" style="margin-top: 15%; font-size: 50px;">Страница не найдено</h1>
+                <h2 align="center" style="font-size: 25px;">404 Ошибка</h2>
+                <p><a href="{{ url_for('home') }}" style="margin-left: 60%; font-size: 18px;" class="btn btn-sm btn-outline-danger">Назад</a></p>
+        </div>      
+{% else %}
+        <div style="font-family:Georgia, 'Times New Roman', Times, serif">
+                <h1 align="center" style="margin-top: 15%; font-size: 50px;">Sahypa tapylmady</h1>
+                <h2 align="center" style="font-size: 25px;">404 YALNYS</h2>
+                <p><a href="{{ url_for('home') }}" style="margin-left: 60%; font-size: 18px;" class="btn btn-sm btn-outline-danger">Yza</a></p>
+        </div>
+{% endif %}
+{% endblock %}
