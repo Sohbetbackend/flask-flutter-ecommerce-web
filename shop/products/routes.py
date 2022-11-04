@@ -150,15 +150,15 @@ def addproduct():
     if request.method=="POST"and 'image_1' in request.files:
         name = form.name.data
         price = form.price.data
-        phone = form.phone.data
         discount = form.discount.data
         desc = form.description.data
         brand = request.form.get('brand')
         category = request.form.get('category')
         image_1 = photos.save(request.files.get('image_1'))
         image_2 = photos.save(request.files.get('image_2'))
-        # image_3 = photos.save(request.files.get('image_3'))
-        addproduct = Addproduct(name=name,price=price,phone=phone,discount=discount,desc=desc,category_id=category,brand_id=brand,image_1=image_1,image_2=image_2, author=current_user)
+        image_3 = photos.save(request.files.get('image_3'))
+        
+        addproduct = Addproduct(name=name,price=price,discount=discount,desc=desc,category_id=category,brand_id=brand,image_1=image_1,image_2=image_2, image_3=image_3,author=current_user)
         db.session.add(addproduct)
         db.session.commit()
         return redirect(url_for('home'))
@@ -179,7 +179,6 @@ def updateproduct(id):
     if request.method =="POST":
         product.name = form.name.data
         product.price = form.price.data
-        product.phone = form.phone.data
         product.discount = form.discount.data
         product.desc = form.description.data
         product.category_id = category
@@ -195,7 +194,6 @@ def updateproduct(id):
         return redirect(url_for('home'))
     form.name.data = product.name
     form.price.data = product.price
-    form.phone.data = product.phone
     form.discount.data = product.discount
     form.description.data = product.desc
     brand = product.brand.name
@@ -212,8 +210,6 @@ def deleteproduct(id):
             os.unlink(os.path.join(current_app.root_path, "static/images/" + product.image_2))
         except Exception as e:
             print(e)
-        os.remove(os.path.join("static/images/" + product.image_1))
-        os.remove(os.path.join("static/images/" + product.image_2))
         db.session.delete(product)
         db.session.commit()
         return redirect(url_for('admin'))
@@ -263,3 +259,4 @@ def approved_cancel(id):
     product.approved = False
     db.session.commit()
     return redirect(url_for('admin'))
+

@@ -12,26 +12,20 @@
     {% if title %}
     <title>{{title}}</title>
     {% else %}
-    <title>Shop.tm-Shop TM</title>
+    <title>Derman.tm-Derman TM</title>
     {% endif %}
     {{ moment.include_moment() }}
+    {{ moment.lang('tk') }}
   </head>
   <body style="font-family:Georgia, 'Times New Roman', Times, serif">
     {% block content %}
 
     {% endblock content %}
 
-    <footer style="background-color: green;">
-    
-      <div class="text-center p-3" style="color: white;">
-        Shop.TM - Bildiriş saýty. © 2022<a href="#" style="color:white;">Biz barada</a><a href="#" style="color:white;">Kömek</a><a href="#" style="color:white;">Ulanyş kadalary</a>
-      </div> 
-      <!-- Copyright -->
-    </footer>
-
 
     <script src="{{url_for('static', filename='js/jquery-3.4.1.slim.min.js')}}" ></script>
     <script src="{{url_for('static', filename='js/popper.min.js')}}"></script>
     <script src="{{url_for('static', filename='js/bootstrap.min.js')}}"></script>
+    <script src="{{ url_for('static', filename='js/click.js') }}"></script>
   </body>
 </html>

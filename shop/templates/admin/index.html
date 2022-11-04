@@ -23,7 +23,7 @@
           {% for product in products %}
           <tr>
             <td>{{ product.id }}</td>
-            <td> <img src="{{url_for('static',filename='images/' + product.image_1)}}" alt="{{product.name}}" width="50" height="20"></td>
+            <td> <a href="{{url_for('static',filename='images/' + product.image_1)}}"><img src="{{url_for('static',filename='images/' + product.image_1)}}" alt="{{product.name}}" width="50" height="50"></td></a>
             <td>{{ product.name }}</td>
             <td>{{ product.price }}</td>
             <td>{{ product.discount }}%</td>

@@ -14,11 +14,12 @@ from flask_migrate import Migrate
 
 basedir = os.path.abspath(os.path.dirname(__file__))
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///test.db'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://root:root@localhost/ecommerce'
 app.config['SECRET_KEY']='hfouewhfoiwefoquw'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['LANGUAGES'] = ['tk', 'ru']
 app.config['UPLOADED_PHOTOS_DEST'] = os.path.join(basedir, 'static/images')
+app.config['MAX_CONTENT_LENGTH'] = 10 * 1024 * 1024
 photos = UploadSet('photos', IMAGES)
 configure_uploads(app, photos)
 patch_request_class(app)

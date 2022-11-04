@@ -13,7 +13,6 @@ class Addproduct(db.Model):
     __searchable__ = ['name']
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(80), nullable=False)
-    phone = db.Column(db.Integer, nullable=False)
     price = db.Column(db.Integer, nullable=False)
     discount = db.Column(db.Integer, default=0)
     desc = db.Column(db.Text, nullable=False)
@@ -26,7 +25,7 @@ class Addproduct(db.Model):
     brand_id = db.Column(db.Integer, db.ForeignKey('brand.id'),nullable=False)
     brand = db.relationship('Brand',backref=db.backref('brands', lazy=True))
 
-    image_1 = db.Column(db.String(150), nullable=False, default='image1.jpg')
+    image_1 = db.Column(db.String(260), default='image1.jpg')
     image_2 = db.Column(db.String(150), default='image2.jpg')
     image_3 = db.Column(db.String(150), default='image3.jpg')
 
@@ -48,6 +47,8 @@ class Brand(db.Model):
 class Category(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(30), unique=True, nullable=False)
+    image_category = db.Column(db.String(100))
+
 
     def __repr__(self):
         return '<Category %r>' % self.name
@@ -66,6 +67,14 @@ class Register(db.Model, UserMixin):
 
     def __repr__(self):
         return '<Register %r>' % self.name
+
+class Banner(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    image = db.Column(db.Text)
+
+    def __repr__(self):
+        return '<Banner %r>' % self.image
+
 
 
 

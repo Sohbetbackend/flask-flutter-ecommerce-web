@@ -74,3 +74,9 @@ def admin_logout():
 def admins():
     admins = User.query.all()
     return render_template('admin/admins.html', admins=admins)
+
+
+@app.route('/admin/banners', methods=['GET', 'POST'])
+def banners():
+    banners = Banner.query.all()
+    return render_template('admin/banners.html', banners=banners)

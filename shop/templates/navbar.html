@@ -28,14 +28,14 @@
 .flaskh1 {
     color: white;
     font-size: 48px;
-    font-family: 'Courier New', Courier, monospace;
+    font-family: Georgia, 'Times New Roman', Times, serif;
 
   }
 
 .catbrand {
   display: flex;
   justify-content: space-between;
-  width: 25%;
+  width: 15%;
   font-family: Georgia, 'Times New Roman', Times, serif;
 }
 
@@ -43,22 +43,17 @@
 </style>
 
   <div class="d-flex" style="background-color: green;">
-    <img src="{{ url_for('static', filename='images/shopify.png') }}" style="height:60px; width:60px;margin-left: 50px;"><a href="{{ url_for('home') }}" style="text-decoration:none;"><h1 class="flaskh1">Shop TM</h1></a>
-    <div class="d-flex" style="margin-left:50%;margin-top: 10px;">
-      <a href="#"><img src="{{ url_for('static', filename='images/playmarket.png') }}" style="width: 40; height:40px;" alt=""></a>
-      <a href="#"><img src="{{ url_for('static', filename='images/appstore.png') }}" style="width: 40; height: 40px;" alt=""></a>
-    </div>
+    <img src="{{ url_for('static', filename='images/shopify.png') }}" style="height:60px; width:60px"><a href="{{ url_for('home') }}" style="text-decoration:none;"><h1 class="flaskh1">Derman TM</h1></a>
   </div>
   <!-- <hr style="margin-bottom:0; background-color: green;"> -->
-  <div class="container">
-    <nav class="navbar navbar-expand-lg navbar-light">
+  <!-- <div class="container"> -->
+    <nav class="navbar navbar-expand-lg bg-light navbar-light">
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="navbar-nav mr-auto catbrand">
-
-            <small><li class="nav-item dropdown">
+            <li class="nav-item dropdown">
               <a class="nav-link dropdown-toggle active" href="#" id="navbarDropdown" role="button" style="font-size:16px;" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 <img class="navbarimages" src="{{ url_for('static', filename='images/category.png') }}" style="width: 15px; height: 15px;" alt="">
                {{ _('Kategoriýalar') }}
@@ -69,9 +64,8 @@
                 {% endfor %}
               </div>
             </li>
-            </small>
-            
-            <small><li class="nav-item dropdown" style="margin-left: 40px;">
+
+            <li class="nav-item dropdown" style="margin-left: 40px;">
               <a class="nav-link dropdown-toggle active" href="#" id="navbarDropdown" role="button" style="font-size:16px;" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
               <img class="navbarimages" src="{{ url_for('static', filename='images/c.png') }}" style="width: 15px; height: 15px;" alt="">
                {{ _('Brendler') }}
@@ -82,13 +76,11 @@
                 {% endfor %}
               </div>
             </li>
-            </small>
-
           </ul>
-          <small>
+          
           <form class="form-inline my-2 my-lg-0" action="{{url_for('result')}}">
-            <input class="form-control mr-sm-8 bg-light" style="width:450px; font-size:14px;font-family: Georgia, 'Times New Roman', Times, serif;" type="search" placeholder="{{ _('Haryt ady boýunça gözläň...') }}" aria-label="Search" name="q">
-
+            <input class="form-control" style="width:450px; font-size:14px;font-family: Georgia, 'Times New Roman', Times, serif;" type="search" placeholder="{{ _('Haryt ady boýunça gözläň...') }}" aria-label="Search" name="q">
+          
             <div class="nav-item dropdown" style="font-family: Georgia, 'Times New Roman', Times, serif;">
               <a class="nav-link dropdown-toggle text-dark" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="font-size: 14px;">
                <img alt="" src="{{ url_for('static', filename='images/world.png') }}" width="21px" height="21px">
@@ -121,7 +113,7 @@
               </div>
             {% endif %}
           </form>
-          </small>
+        
         </div>
       </nav>
     </div>
