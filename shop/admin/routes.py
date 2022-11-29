@@ -2,7 +2,7 @@ from flask import render_template,session, request,redirect,url_for,flash
 from shop import app,db,bcrypt
 from .forms import RegistrationForm,LoginForm
 from .models import User
-from shop.products.models import Addproduct,Category,Brand
+from shop.products.models import Addproduct,Category,Image, Subcategory
 
 
 @app.route('/admin/')
@@ -11,16 +11,17 @@ def admin():
         flash(f'Ilkinji içeri giriň','danger')
         return redirect(url_for('login'))
     products = Addproduct.query.order_by(Addproduct.approved).all()
-    return render_template('admin/index.html', title='Admin page',products=products)
+    images = Image.query.all()
+    return render_template('admin/index.html', title='Admin page',products=products, images=images)
 
 
-@app.route('/admin/brands')
-def brands():
+@app.route('/admin/approveimages/<int:id>', methods=['GET'])
+def get_images(id):
     if 'email' not in session:
         flash(f'Ilkinji içeri giriň','danger')
         return redirect(url_for('login'))
-    brands = Brand.query.order_by(Brand.id.desc()).all()
-    return render_template('admin/brand.html', title='brands',brands=brands)
+    products = Addproduct.query.get_or_404(id)
+    return render_template('admin/approve_images.html', products=products)
 
 
 @app.route('/admin/categories')

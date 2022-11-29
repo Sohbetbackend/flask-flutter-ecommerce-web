@@ -1,0 +1,11 @@
+{% extends 'layout.html' %}
+{% block content %}
+<div class="container" style="font-family: Georgia, 'Times New Roman', Times, serif;">
+    {% include '_messages.html' %}
+    {% include 'admin/adminnavbar.html' %}
+    {% for image in images %}
+    <img src="{{url_for('static',filename='images/' + image.name)}}" alt="{{image.name}}" width="200" height="200" style="object-fit:cover;">
+    {% endfor %}
+</div>
+{% endblock content %}
+

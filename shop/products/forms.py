@@ -8,7 +8,6 @@ class Addproducts(Form):
     discount = IntegerField(_l('Arzanladyş'), default=0)
     description = TextAreaField(_l('Giňişleýin'), [validators.DataRequired()])
 
-    image_1 = FileField(_l('Surat'), validators=[FileRequired(), FileAllowed(['jpg','png','gif','jpeg', 'webp']), 'Haýyş edýäs diňeje surat'], render_kw={'multiple': True})
 
 class Banner(Form):
     name = StringField('Bannerin ady', [validators.DataRequired()])

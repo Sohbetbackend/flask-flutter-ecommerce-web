@@ -7,7 +7,9 @@
 <div class="container mt-3" style="font-family: Georgia, 'Times New Roman', Times, serif;">
     <div class="row">
         <div class="col-md-6" id="b_image">
-            <img src="{{url_for('static',filename='images/' + product.image_1)}}" alt="{{product.name}}" style="width:50vh; height: 55vh;">
+            
+            <img src="{{url_for('static', filename='productsimage/' + product.addproducts.name)}}" alt="{{product.name}}" style="width:50vh; height: 55vh;object-fit:cover;">
+            
         </div>
         <div class="col-md-6">
             
@@ -17,43 +19,20 @@
             <b>{{ _('Önümiň bahasy:') }}</b>
             <p>{{product.price}} manat</p>
             <hr>
-            {% if product.discount > 0 %}
-            <p>{{ _('Arzanladyş:') }} {{product.discount}} % </p>
-            <hr>
-            {% endif %}
-            
+            <b>{{ _("Telefon Nomeri:") }}</b>
+            <p>{{ product.author.contact }}</p>
             <b>{{ _('Önümiň maglumaty:') }}</b>
             <p>{{product.desc}}</p>
             <hr>
             <b>{{ _('Goýulan senesi:') }}</b>
-            <p>{{product.pub_date}}</p>
+            <p>{{moment(product.pub_date).fromNow()}}</p>
             
         </div>
     </div>
 
-<hr>
 <div class="row">
-    <div class="col-md-12" id="s_image">
-        
-        <img src="{{url_for('static',filename='images/'+ product.image_1)}}" alt="{{product.name}}" width="130" height="130">
-        
-        <img src="{{url_for('static',filename='images/'+ product.image_2)}}" alt="{{product.name}}" width="130" height="130">
-        
-        <img src="{{url_for('static',filename='images/'+ product.image_3)}}" alt="{{product.name}}" width="130" height="130">
-        
-    </div>
+    
 </div>
 </div>
-<script>
-    var b_image = document.getElementById('b_image');
-    var s_image = document.getElementById('s_image').getElementsByTagName('img');
-     for(var i = 0; i < s_image.length; i++){
- 
-         s_image[i].addEventListener('click', full_image);
-     }
-     function full_image(){
-         var ImageSRC = this.getAttribute('src');
-         b_image.innerHTML = "<img src=" + ImageSRC + " width='384'height='420'>";
-     }
- </script>
+
 {% endblock content %}

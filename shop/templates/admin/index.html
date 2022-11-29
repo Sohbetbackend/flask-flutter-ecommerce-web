@@ -10,10 +10,9 @@
             <th>Surat</th>
             <th>Ady</th>
             <th>Bahasy</th>
-            <th>Arzanladyş</th>
             <th>Kim goydy</th>
-            <th>Brend</th>
             <th>Kategoriya</th>
+            <th>Subcategory</th>
             <th>Redaktirle</th>
             <th>Pozmak</th>
             <th>Rugsat</th>
@@ -23,13 +22,12 @@
           {% for product in products %}
           <tr>
             <td>{{ product.id }}</td>
-            <td> <a href="{{url_for('static',filename='images/' + product.image_1)}}"><img src="{{url_for('static',filename='images/' + product.image_1)}}" alt="{{product.name}}" width="50" height="50"></td></a>
+            <td> <a href="#"><img src="{{url_for('static',filename='productsimage/' + product.addproducts.name)}}" alt="{{product.name}}" width="50" height="50" style="object-fit:cover;"></td></a>
             <td>{{ product.name }}</td>
             <td>{{ product.price }}</td>
-            <td>{{ product.discount }}%</td>
             <td>{{ product.author.name }}</td>
-            <td>{{ product.brand.name}}</td>
             <td>{{ product.category.name }}</td>
+            <td>{{ product.subcategory.names }}</td>
             <td><a href="{{url_for('updateproduct', id=product.id)}}" class="btn btn-sm btn-info">Redaktirle </a> </td>
             <td><button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#exampleModal-{{product.id}}">
               Pozmak

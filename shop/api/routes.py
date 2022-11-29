@@ -3,7 +3,7 @@ from flask_sqlalchemy import SQLAlchemy
 from flask_marshmallow import Marshmallow
 from flask_restful import Api, Resource
 from shop import db, app, api, ma
-from shop.products.models import Addproduct, Brand, Category, Register
+from shop.products.models import Addproduct, Category, Register
 
 
 @app.route('/api/register', methods=['GET', 'POST'])

@@ -8,51 +8,51 @@ def user_loader(user_id):
     return Register.query.get(user_id)
 
 
-#Towar goshmak uchin table
+#USERS ADDING PRODUCT 
 class Addproduct(db.Model):
     __searchable__ = ['name']
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(80), nullable=False)
     price = db.Column(db.Integer, nullable=False)
-    discount = db.Column(db.Integer, default=0)
     desc = db.Column(db.Text, nullable=False)
     pub_date = db.Column(db.DateTime, nullable=False,default=datetime.utcnow)
     approved = db.Column(db.Boolean, default=False)
     register_id = db.Column(db.Integer, db.ForeignKey('register.id'))
     category_id = db.Column(db.Integer, db.ForeignKey('category.id'),nullable=False)
     category = db.relationship('Category',backref=db.backref('categories', lazy=True))
-
-    brand_id = db.Column(db.Integer, db.ForeignKey('brand.id'),nullable=False)
-    brand = db.relationship('Brand',backref=db.backref('brands', lazy=True))
-
-    image_1 = db.Column(db.String(260), default='image1.jpg')
-    image_2 = db.Column(db.String(150), default='image2.jpg')
-    image_3 = db.Column(db.String(150), default='image3.jpg')
-
+    subcategory_id = db.Column(db.Integer, db.ForeignKey('subcategory.id'),nullable=False)
+    subcategory = db.relationship('Subcategory',backref=db.backref('subcategories', lazy=True))
+    image_id = db.Column(db.Integer, db.ForeignKey('image.id'))
 
     def __repr__(self):
         return '<Addproduct %r>' % self.name
 
 
-#Brend table
-class Brand(db.Model):
+# UPLOADING IMAGES
+class Image(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(30), unique=True, nullable=False)
-
-    def __repr__(self):
-        return '<Brand %r>' % self.name
+    name = db.Column(db.String(255))
+    img = db.Column(db.Text)
+    addproduct = db.relationship('Addproduct', backref=db.backref('addproducts', lazy=True))
+    
 
 
 #Kategoriya table
 class Category(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(30), unique=True, nullable=False)
-    image_category = db.Column(db.String(100))
 
 
     def __repr__(self):
         return '<Category %r>' % self.name
 
+
+# SUBCATEGORY TABLE
+class Subcategory(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    names = db.Column(db.String(64))
+    category_id = db.Column(db.Integer, db.ForeignKey('category.id'),nullable=False)
+    category = db.relationship('Category',backref=db.backref('categoriess', lazy=True))
 
 
 
@@ -64,16 +64,8 @@ class Register(db.Model, UserMixin):
     contact = db.Column(db.String(50), unique= False)
     posts = db.relationship('Addproduct', backref='author', lazy='dynamic')
 
-
     def __repr__(self):
         return '<Register %r>' % self.name
-
-class Banner(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    image = db.Column(db.Text)
-
-    def __repr__(self):
-        return '<Banner %r>' % self.image
 
 
 

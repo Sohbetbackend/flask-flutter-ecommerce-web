@@ -3,7 +3,6 @@ from flask_sqlalchemy import SQLAlchemy
 from flask_marshmallow import Marshmallow
 from flask_restful import Api, Resource
 from flask_bcrypt import Bcrypt
-from flask_uploads import UploadSet, configure_uploads, IMAGES, patch_request_class
 import os
 from flask_msearch import Search
 from flask_login import LoginManager
@@ -14,15 +13,12 @@ from flask_migrate import Migrate
 
 basedir = os.path.abspath(os.path.dirname(__file__))
 app = Flask(__name__)
+app.config['UPLOAD_FOLDER'] = os.path.join(basedir, 'static/productsimage')
+app.config['MAX_CONTENT_LENGTH'] = 16 * 1024 * 1024
 app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://root:root@localhost/ecommerce'
 app.config['SECRET_KEY']='hfouewhfoiwefoquw'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['LANGUAGES'] = ['tk', 'ru']
-app.config['UPLOADED_PHOTOS_DEST'] = os.path.join(basedir, 'static/images')
-app.config['MAX_CONTENT_LENGTH'] = 10 * 1024 * 1024
-photos = UploadSet('photos', IMAGES)
-configure_uploads(app, photos)
-patch_request_class(app)
 
 
 db = SQLAlchemy(app)

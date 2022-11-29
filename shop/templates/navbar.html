@@ -45,8 +45,6 @@
   <div class="d-flex" style="background-color: green;">
     <img src="{{ url_for('static', filename='images/shopify.png') }}" style="height:60px; width:60px"><a href="{{ url_for('home') }}" style="text-decoration:none;"><h1 class="flaskh1">Derman TM</h1></a>
   </div>
-  <!-- <hr style="margin-bottom:0; background-color: green;"> -->
-  <!-- <div class="container"> -->
     <nav class="navbar navbar-expand-lg bg-light navbar-light">
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -64,23 +62,6 @@
                 {% endfor %}
               </div>
             </li>
-
-            <li class="nav-item dropdown" style="margin-left: 40px;">
-              <a class="nav-link dropdown-toggle active" href="#" id="navbarDropdown" role="button" style="font-size:16px;" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              <img class="navbarimages" src="{{ url_for('static', filename='images/c.png') }}" style="width: 15px; height: 15px;" alt="">
-               {{ _('Brendler') }}
-              </a>
-              <div class="dropdown-menu dropdownMenu" aria-labelledby="navbarDropdown">
-                {% for brand in brands %}
-                <a class="dropdown-item" style="font-size: .8rem;" href="{{url_for('get_brand', id=brand.id)}}">{{brand.name}}</a>
-                {% endfor %}
-              </div>
-            </li>
-          </ul>
-          
-          <form class="form-inline my-2 my-lg-0" action="{{url_for('result')}}">
-            <input class="form-control" style="width:450px; font-size:14px;font-family: Georgia, 'Times New Roman', Times, serif;" type="search" placeholder="{{ _('Haryt ady boýunça gözläň...') }}" aria-label="Search" name="q">
-          
             <div class="nav-item dropdown" style="font-family: Georgia, 'Times New Roman', Times, serif;">
               <a class="nav-link dropdown-toggle text-dark" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="font-size: 14px;">
                <img alt="" src="{{ url_for('static', filename='images/world.png') }}" width="21px" height="21px">
@@ -94,6 +75,11 @@
                 </a>
               </div>
             </div>
+          </ul>
+          
+          <form class="form-inline my-2 my-lg-0" action="{{url_for('result')}}">
+            <input class="form-control" style="width:450px; font-size:14px;font-family: Georgia, 'Times New Roman', Times, serif;" type="search" placeholder="{{ _('Haryt ady boýunça gözläň...') }}" aria-label="Search" name="q">
+          
             {% if current_user.is_anonymous %}
             <a href="{{url_for('customer_register')}}" class="nav-link text-dark" style="font-size:16px;font-family: Georgia, 'Times New Roman', Times, serif;"><img src="{{ url_for('static', filename='images/add-friend.png') }}" class="navbarimages" style="width: 16px; height: 16px" alt=""> {{ _('Agza bol') }}</a>
             <a href="{{url_for('customerLogin')}}" class="nav-link text-dark" style="font-size:16px;font-family: Georgia, 'Times New Roman', Times, serif;"><img src="{{ url_for('static', filename='images/enter.png') }}" class="navbarimages" style="width: 15px; height: 15px" alt=""> {{ _('Içeri gir') }}</a>

@@ -36,75 +36,18 @@
         <span class="sr-only">Next</span>
       </a>
     </div>
-    
-
-<!-- =============== BREND =============== -->
-    <h1 style="color: black; font-size: 35px;">{{ _('Ähli Önümler') }} </h1>
-    <div class="row">
-        {% if brand %}
-         {% for b in brand.items %}
-         {% if b.approved == true %}
-        <div class="col-md-3 col-sm-6">
-            <div class="card">
-                <img src="{{url_for('static', filename='images/' + b.image_1)}}" class="card-img-top" alt="{{b.name}}" style="height: 50vh; max-height: 50vh">
-                <div class="card-body">
-                    {% if b.discount > 0 %}
-                    <h5 style="text-shadow: 1px 2px 2px #000; color: white; position: absolute; top: 3%; left: 70%; font-weight: 600; border: 2px solid #10F417; background:#10F417; border-radius:50%; font-size:14px; font-family:italic;">-{{b.discount}}%</h5>
-                    {% endif %}
-                  <h5 class="text-center">{{b.name}}</h5>
-                  <h5 style="color: green; position: absolute; top: 63%; left: auto; font-weight: 600; font-size:16px; font-family:italic;border:5px double lightgreen;border-radius: 10px;background-color: lightgreen;">{{b.price}} TMT</h5>
-                  <h6 class="text-center">{{ moment(b.pub_date).fromNow() }}</h5>
-                </div>
-                <div class="card-footer">
-                    <a href="{{url_for('single_page',id=b.id)}}" class="float-left btn btn-sm btn-success btn-block" style="font-size:14px;">{{ _('Giňişleýin') }}</a>
-                    
-                </div>
-            </div>
-          </div>
-          {% endif %}
-        {% endfor %}
-    </div>
-
-    <div class="row mt-4">
-      <div class="col text-center">
-        {% if brand.has_prev %}
-          <a href="{{url_for('get_brand',id=get_brand.id, page=brand.prev_num)}}"class="btn btn-sm btn-outline-success">{{ _('Öňki') }}</a>
-        {% endif %}
-        {% if brand.total > 30 %}
-       {% for page_num in brand.iter_pages(left_edge=1, right_edge=2, left_current=1,right_current=2) %}
-       {% if page_num %}
-         {% if brand.page == page_num %}
-         <a href="{{url_for('get_brand',id=get_brand.id, page=page_num)}}" class="btn btn-sm btn-success">{{page_num}}</a>
-         {% else %}
-         <a href="{{url_for('get_brand',id=get_brand.id, page=page_num)}}" class="btn btn-sm btn-outline-success">{{page_num}}</a>
-          {% endif %}
-        {% else %}
-        ...
-        {% endif %}
-       {% endfor %}
-       {% endif %}
-       {% if brand.has_next %}
-       <a href="{{url_for('get_brand',id=get_brand.id, page=brand.next_num)}}"class="btn btn-sm btn-outline-success">{{ _('Indiki') }}</a>
-     {% endif %}
-      </div>
-    </div>
-    <!--================= END OF BRENDS ================-->
-
-
+    <br>
     <!-- ================ CATEGORIES =================== -->
     <div class="row">
-        {% elif get_cat_prod %}
+        {% if get_cat_prod %}
         {% for get_cat in get_cat_prod.items %}
         {% if get_cat.approved == true %}
         <div class="col-md-3 col-sm-6">
             <div class="card">
-                <img src="{{url_for('static', filename='images/' + get_cat.image_1)}}" class="card-img-top" alt="{{get_cat.name}}" style="height: 50vh; max-height: 50vh">
+                <img src="{{url_for('static', filename='productsimage/' + get_cat.addproducts.name)}}" class="card-img-top" alt="{{get_cat.name}}" style="height: 30vh; height: 30vh; object-fit:cover;">
                 <div class="card-body">
-                    {% if get_cat.discount > 0 %}
-                    <h5 style="text-shadow: 1px 2px 2px #000; color: white; position: absolute; top: 3%; left: 70%; font-weight: 600; border: 2px solid #10F417; background:#10F417; border-radius: 50%; font-size:14px; font-family:italic;">-{{get_cat.discount}}%</h5>
-                    {% endif %}
                   <h5 class="text-center">{{get_cat.name}}</h5>
-                  <h5 style="color: green; position: absolute; top: 63%; left: auto; font-weight: 600; font-size:16px; font-family:italic;border:5px double lightgreen;border-radius: 10px;background-color: lightgreen;">{{get_cat.price}} TMT</h5>
+                  <h5 style="color: green; position: absolute; top: 50%; left: auto; font-weight: 600; font-size:16px; font-family:italic;border:5px double lightgreen;border-radius: 10px;background-color: lightgreen;">{{get_cat.price}} TMT</h5>
                   <h6 class="text-center">{{ moment(get_cat.pub_date).fromNow() }}</h5>
                 </div>
                 <div class="card-footer">
@@ -150,13 +93,12 @@
         {% if product.approved == true %}
         <div class="col-md-3 col-sm-6">
           <div class="card">
-              <img src="{{url_for('static', filename='images/' + product.image_1)}}" class="card-img-top" alt="{{product.name}}" style="height: 50vh; height: 50vh">
+            
+              <img src="{{url_for('static', filename='productsimage/' + product.addproducts.name)}}" class="card-img-top" alt="{{product.name}}" style="height: 30vh; height: 30vh; object-fit:cover;">
+            
               <div class="card-body">
-                  {% if product.discount > 0 %}
-                  <h5 style="text-shadow: 1px 2px 2px #000; color: white; position: absolute; top: 3%; left: 70%; font-weight: 600; border: 2px solid #10F417; background:#10F417; border-radius: 50%; font-size:14px; font-family:italic;">-{{product.discount}}%</h5>
-                  {% endif %}
                 <h5 class="text-center">{{product.name}}</h5>
-                <h5 style="color: green; position: absolute; top: 63%; left: auto; font-weight: 600; font-size:16px; font-family:italic;border:5px double lightgreen;border-radius: 10px;background-color: lightgreen;">{{product.price}}tmt</h5>
+                <h5 style="color: green; position: absolute; top: 50%; left: auto; font-weight: 600; font-size:16px; font-family:italic;border:5px double lightgreen;border-radius: 10px;background-color: lightgreen;">{{product.price}}tmt</h5>
                 <h6 class="text-center">{{ moment(product.pub_date).fromNow() }}</p>
               </div>
               <div class="card-footer">

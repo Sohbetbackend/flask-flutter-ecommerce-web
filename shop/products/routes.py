@@ -1,19 +1,28 @@
 from flask import render_template,session, request,redirect,url_for,flash,current_app
-from shop import app,db,photos, search
-from .models import Category,Brand,Addproduct,Register
+from shop import app,db,search
+from .models import Category,Addproduct,Register, Image, Subcategory
 from .forms import Addproducts
 import secrets
 import os
 from flask_login import current_user, login_required
+from werkzeug.utils import secure_filename
+import urllib.request
 
 
-def brands():
-    brands = Brand.query.join(Addproduct, (Brand.id == Addproduct.brand_id)).all()
-    return brands
+ALLOWED_EXTENSIONS = set(['png', 'jpg', 'jpeg', 'gif'])
+
+
+def allowed_file(filename):
+    return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
+
 
 def categories():
     categories = Category.query.join(Addproduct,(Category.id == Addproduct.category_id)).all()
     return categories
+
+def subcategories():
+    subcategories = Subcategory.query.join(Addproduct,(Subcategory.id == Addproduct.subcategory_id)).all()
+    return subcategories
 
 
 @app.route('/')
@@ -21,28 +30,20 @@ def categories():
 def home():
     page = request.args.get('page',1, type=int)
     products = Addproduct.query.order_by(Addproduct.price.desc()).paginate(page=page, per_page=28)
-    return render_template('products/index.html', products=products,brands=brands(),categories=categories())
+    return render_template('products/index.html', products=products, categories=categories(), subcategories=subcategories())
 
 
 @app.route('/result')
 def result():
     searchword = request.args.get('q')
     products = Addproduct.query.msearch(searchword, fields=['name'] , limit=28)
-    return render_template('products/result.html',products=products, brands=brands(),categories=categories())
+    return render_template('products/result.html',products=products, categories=categories())
 
 
 @app.route('/product/<int:id>')
 def single_page(id):
     product = Addproduct.query.get_or_404(id)
-    return render_template('products/single_page.html',product=product, brands=brands(),categories=categories())
-
-
-@app.route('/brand/<int:id>')
-def get_brand(id):
-    page = request.args.get('page',1, type=int)
-    get_brand = Brand.query.filter_by(id=id).first_or_404()
-    brand = Addproduct.query.filter_by(brand=get_brand).paginate(page=page, per_page=28)
-    return render_template('products/index.html',brand=brand,brands=brands(),categories=categories(),get_brand=get_brand)
+    return render_template('products/single_page.html',product=product, categories=categories())
 
 
 @app.route('/categories/<int:id>')
@@ -50,51 +51,7 @@ def get_category(id):
     page = request.args.get('page',1, type=int)
     get_cat = Category.query.filter_by(id=id).first_or_404()
     get_cat_prod = Addproduct.query.filter_by(category=get_cat).paginate(page=page, per_page=28)
-    return render_template('products/index.html',get_cat_prod=get_cat_prod,brands=brands(),categories=categories(),get_cat=get_cat)
-
-
-@app.route('/addbrand',methods=['GET','POST'])
-def addbrand():
-    if 'email' not in session:
-        flash('Birinji ulgama giriň','danger')
-        return redirect(url_for('login'))
-    categories = Category.query.all()
-    if request.method =="POST":
-        getbrand = request.form.get('brand')
-        brand = Brand(name=getbrand)
-        db.session.add(brand)
-        db.session.commit()
-        return redirect(url_for('addbrand'))
-    return render_template('products/addbrand.html', title='Add brand',brands='brands', categories=categories)
-
-
-@app.route('/updatebrand/<int:id>',methods=['GET','POST'])
-def updatebrand(id):
-    if 'email' not in session:
-        flash('Birinji ulgama giriň','danger')
-        return redirect(url_for('login'))
-    updatebrand = Brand.query.get_or_404(id)
-    brand = request.form.get('brand')
-    if request.method =="POST":
-        updatebrand.name = brand
-        db.session.commit()
-        return redirect(url_for('brands'))
-    brand = updatebrand.name
-    return render_template('products/addbrand.html', title='Udate brand',brands='brands',updatebrand=updatebrand)
-
-
-@app.route('/deletebrand/<int:id>', methods=['GET','POST'])
-def deletebrand(id):
-    if 'email' not in session:
-        flash('Birinji ulgama giriň','danger')
-        return redirect(url_for('login'))
-    brand = Brand.query.get_or_404(id)
-    if request.method=="POST":
-        db.session.delete(brand)
-        db.session.commit()
-        return redirect(url_for('admin'))
-    flash(f"The brand {brand.name} can't be  deleted from your database","warning")
-    return redirect(url_for('admin'))
+    return render_template('products/index.html',get_cat_prod=get_cat_prod,categories=categories(),get_cat=get_cat)
 
 
 @app.route('/addcat',methods=['GET','POST'])
@@ -107,7 +64,7 @@ def addcat():
         category = Category(name=getcat)
         db.session.add(category)
         db.session.commit()
-        return redirect(url_for('addcat'))
+        return redirect(url_for('addsubcat'))
     return render_template('products/addbrand.html', title='Add category')
 
 
@@ -120,13 +77,29 @@ def updatecat(id):
     category = request.form.get('category')
     if request.method =="POST":
         updatecat.name = category
-        flash(f'The category {updatecat.name} was changed to {category}','success')
         db.session.commit()
         return redirect(url_for('categories'))
     category = updatecat.name
-    return render_template('products/addbrand.html', title='Update cat',updatecat=updatecat)
+    return render_template('products/addbrand.html', title='Update category',categories='categories',updatecat=updatecat)
 
 
+
+@app.route('/addsubcat', methods=['GET', 'POST'])
+def addsubcat():
+    if 'email' not in session:
+        return redirect(url_for('login'))
+    categories = Category.query.all()
+    if request.method == 'POST':
+        addsubcategory = request.form.get('addsubcategory')
+        category = request.form.get('category')
+        subcategories = Subcategory(names=addsubcategory, category_id=category)
+        db.session.add(subcategories)
+        db.session.commit()
+        return redirect(url_for('addsubcat'))
+    return render_template('products/addsubcategory.html', categories=categories)
+
+
+    
 @app.route('/deletecat/<int:id>', methods=['GET','POST'])
 def deletecat(id):
     if 'email' not in session:
@@ -140,29 +113,36 @@ def deletecat(id):
     flash(f"The brand {category.name} can't be  deleted from your database","warning")
     return redirect(url_for('admin'))
 
-
+    
+# ADDING PRODUCT ROUTE
 @app.route('/addproduct', methods=['GET','POST'])
 @login_required
 def addproduct():
     form = Addproducts(request.form)
-    brands = Brand.query.all()
     categories = Category.query.all()
-    if request.method=="POST"and 'image_1' in request.files:
+    subcategories = Subcategory.query.all()
+    if request.method=="POST":
+        files = request.files.getlist('files[]')
+        file_names = []
+        for file in files:
+            if file and allowed_file(file.filename):
+                filename = secure_filename(file.filename)
+                file_names.append(filename)
+                file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+                print('Success')
+                img = Image(img=file.read(), name=filename)
+                db.session.add(img)
+                db.session.commit()
         name = form.name.data
         price = form.price.data
-        discount = form.discount.data
         desc = form.description.data
-        brand = request.form.get('brand')
         category = request.form.get('category')
-        image_1 = photos.save(request.files.get('image_1'))
-        image_2 = photos.save(request.files.get('image_2'))
-        image_3 = photos.save(request.files.get('image_3'))
-        
-        addproduct = Addproduct(name=name,price=price,discount=discount,desc=desc,category_id=category,brand_id=brand,image_1=image_1,image_2=image_2, image_3=image_3,author=current_user)
+        subcategory = request.form.get('subcategory')
+        addproduct = Addproduct(name=name,price=price,desc=desc,category_id=category,subcategory_id=subcategory,author=current_user)
         db.session.add(addproduct)
         db.session.commit()
         return redirect(url_for('home'))
-    return render_template('products/addproduct.html', form=form, title='Add a Product', brands=brands,categories=categories)
+    return render_template('products/addproduct.html', form=form, title='Add a Product', categories=categories, subcategories=subcategories)
 
 
 @app.route('/updateproduct/<int:id>', methods=['GET','POST'])
@@ -172,7 +152,6 @@ def updateproduct(id):
         return redirect(url_for('login'))
     form = Addproducts(request.form)
     product = Addproduct.query.get_or_404(id)
-    brands = Brand.query.all()
     categories = Category.query.all()
     brand = request.form.get('brand')
     category = request.form.get('category')
@@ -182,13 +161,6 @@ def updateproduct(id):
         product.discount = form.discount.data
         product.desc = form.description.data
         product.category_id = category
-        product.brand_id = brand
-        if request.files.get('image_1'):
-            try:
-                os.unlink(os.path.join(current_app.root_path, "static/images/" + product.image_1))
-                product.image_1 = photos.save(request.files.get('image_1'))
-            except:
-                product.image_1 = photos.save(request.files.get('image_1'))
         flash('The product was updated','success')
         db.session.commit()
         return redirect(url_for('home'))
@@ -196,9 +168,8 @@ def updateproduct(id):
     form.price.data = product.price
     form.discount.data = product.discount
     form.description.data = product.desc
-    brand = product.brand.name
     category = product.category.name
-    return render_template('products/addproduct.html', form=form, title='Update Product',getproduct=product, brands=brands,categories=categories)
+    return render_template('products/addproduct.html', form=form, title='Update Product',getproduct=product,categories=categories)
 
 
 @app.route('/deleteproduct/<int:id>', methods=['POST'])
@@ -206,8 +177,7 @@ def deleteproduct(id):
     product = Addproduct.query.get_or_404(id)
     if request.method =="POST":
         try:
-            os.unlink(os.path.join(current_app.root_path, "static/images/" + product.image_1))
-            os.unlink(os.path.join(current_app.root_path, "static/images/" + product.image_2))
+            print(e)
         except Exception as e:
             print(e)
         db.session.delete(product)
@@ -215,21 +185,6 @@ def deleteproduct(id):
         return redirect(url_for('admin'))
     flash(f'Maglumaty pozmak mümkinçiligi ýok','success')
     return redirect(url_for('admin'))
-
-
-@app.route('/transproduct/', methods=['GET','POST'])
-def transproduct():
-    form = Translaterussian(request.form)
-    brands = Brand.query.all()
-    categories = Category.query.all()
-    if request.method=="POST":
-        prodname = form.prodname.data
-        proddesc = form.proddesc.data
-        transproduct = TranslateRussian(prodname=prodname,proddesc=proddesc)
-        db.session.add(transproduct)
-        db.session.commit()
-        return redirect(url_for('home'))
-    return render_template('products/translateRU.html', form=form, title='Add a Product', brands=brands,categories=categories)
 
 
 @app.route('/myproducts/<name>', methods=['GET'])

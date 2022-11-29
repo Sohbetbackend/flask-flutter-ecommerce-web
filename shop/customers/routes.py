@@ -1,16 +1,12 @@
 from flask import render_template,session, request,redirect,url_for,flash,current_app,make_response
 from flask_login import login_required, current_user, logout_user, login_user
 from flask_babel import _
-from shop import app,db,photos, search,bcrypt,login_manager
+from shop import app,db,search,bcrypt,login_manager
 from .forms import CustomerRegisterForm, CustomerLoginFrom
-from shop.products.models import Brand, Category, Addproduct, Register
+from shop.products.models import Category, Addproduct, Register
 import secrets
 import os
 import json
-
-def brands():
-    brands = Brand.query.join(Addproduct, (Brand.id == Addproduct.brand_id)).all()
-    return brands
 
 def categories():
     categories = Category.query.join(Addproduct,(Category.id == Addproduct.category_id)).all()
@@ -26,7 +22,7 @@ def customer_register():
         db.session.add(register)
         db.session.commit()
         return redirect(url_for('customerLogin'))
-    return render_template('customer/register.html', form=form, brands=brands(),categories=categories())
+    return render_template('customer/register.html', form=form, categories=categories())
 
 
 @app.route('/customer/login', methods=['GET','POST'])
@@ -41,7 +37,7 @@ def customerLogin():
         flash(_('Nädogry telefon ýada açar söz'))
         return redirect(url_for('customerLogin'))
 
-    return render_template('customer/login.html', form=form, brands=brands(),categories=categories())
+    return render_template('customer/login.html', form=form, categories=categories())
 
 
 @app.route('/customer/logout')
@@ -54,7 +50,7 @@ def customer_logout():
 @login_required
 def aboutCustomer(name):
     user = Register.query.filter_by(name=name).first_or_404()
-    return render_template('customer/aboutcustomer.html', user=user, brands=brands(),categories=categories())
+    return render_template('customer/aboutcustomer.html', user=user, categories=categories())
 
 
 def updateshoppingcart():
@@ -77,7 +73,7 @@ def set_language(language=None):
 @app.route('/admin/customers', methods=['GET'])
 def get_customers():
     clients = Register.query.all()
-    return render_template('customer/customers.html', clients=clients, brands=brands(), categories=categories())
+    return render_template('customer/customers.html', clients=clients, categories=categories())
 
 
 @app.route('/admin/customer/<int:id>', methods=['GET','POST'])
